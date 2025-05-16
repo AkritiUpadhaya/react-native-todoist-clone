@@ -1,29 +1,65 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Toaster } from 'sonner-native';
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-import { useColorScheme } from '@/hooks/useColorScheme';
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+  const InitialLayout = () => {
+    const router = useRouter();
+    const { isLoaded, isSignedIn } = useAuth();
+    const segments = useSegments();
+    const pathname = usePathname();
+  
+    useEffect(() => {
+      if (!isLoaded) return;
+      const inAuthGroup = segments[0] === '(auth)';
+  
+      if (isSignedIn && !inAuthGroup) {
+        router.replace('/(auth)/(tabs)/today');
+      } else if (!isSignedIn && pathname !== '/') {
+        router.replace('/');
+      }
+    }, [isSignedIn]);
+  
+    if (!isLoaded) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" color="blue" />
+        </View>
+      );
+    }
+    return (
+      <Stack
+        screenOptions={{
+          contentStyle: {
+            backgroundColor: '#fff',
+          },
+        }}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    );
+  };
+  
+
+const Rootlayout = () => {
+  return (
+    <ClerkProvider 
+      publishableKey={publishableKey}
+      tokenCache={tokenCache}
+    >
+      <ClerkLoaded>
+        <GestureHandlerRootView>
+        <Toaster />
+        <InitialLayout />
+        </GestureHandlerRootView>
+      </ClerkLoaded>
+    </ClerkProvider>
   );
-}
+};
+
+export default Rootlayout;
