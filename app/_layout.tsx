@@ -1,7 +1,7 @@
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Toaster } from 'sonner-native';
@@ -13,6 +13,11 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
     const { isLoaded, isSignedIn } = useAuth();
     const segments = useSegments();
     const pathname = usePathname();
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+      setIsMounted(true);
+    }, []);
   
     useEffect(() => {
       if (!isLoaded) return;
@@ -23,7 +28,7 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
       } else if (!isSignedIn && pathname !== '/') {
         router.replace('/');
       }
-    }, [isSignedIn]);
+    }, [isLoaded,isSignedIn, segments ,isMounted], );
   
     if (!isLoaded) {
       return (
