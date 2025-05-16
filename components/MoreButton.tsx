@@ -26,6 +26,44 @@ const MoreButton = ({pageName}:MoreButtonProps) => {
         }}
         ></DropdownMenu.ItemIcon>
        </DropdownMenu.Item>
+
+       <DropdownMenu.Group>
+        
+       <DropdownMenu.Item key='select'>
+        <DropdownMenu.ItemTitle>Select</DropdownMenu.ItemTitle>
+        <DropdownMenu.ItemIcon
+        ios={{
+          name:'square.stack',
+          pointSize:24
+        }}
+        ></DropdownMenu.ItemIcon>
+       </DropdownMenu.Item>
+
+
+       <DropdownMenu.Item key='view'>
+        <DropdownMenu.ItemTitle>View</DropdownMenu.ItemTitle>
+        <DropdownMenu.ItemIcon
+        ios={{
+          name:'slider.horizontal.3',
+          pointSize:24
+        }}
+        ></DropdownMenu.ItemIcon>
+       </DropdownMenu.Item>
+
+       <DropdownMenu.Item key='activity'>
+        <DropdownMenu.ItemTitle>Activity Log</DropdownMenu.ItemTitle>
+        <DropdownMenu.ItemIcon
+        ios={{
+          name:'chart.xyaxis.line',
+          pointSize:24
+        }}
+        ></DropdownMenu.ItemIcon>
+       </DropdownMenu.Item>
+
+       </DropdownMenu.Group>
+
+
+
       </DropdownMenu.Content>
     </DropdownMenu.Root>
     </>  )

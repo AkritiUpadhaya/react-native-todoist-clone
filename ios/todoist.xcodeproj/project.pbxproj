@@ -8,28 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2E1F51C94261C61157985FDD /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C382B9A6645E017153741DD /* ExpoModulesProvider.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		4C657B6B607750D1A8BE1492 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5702CFACF10737368963EA /* ExpoModulesProvider.swift */; };
-		83BFA8B326F3E59771D3324A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E53DE0B247317CF1BFB382B8 /* PrivacyInfo.xcprivacy */; };
+		6E1AE404B7A5F36798EF7D1B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F43368B24B5E8B3515A022B1 /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		D55EA75343451A2A1C8961D1 /* libPods-todoist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F97E5A19254FE4D1D3688D90 /* libPods-todoist.a */; };
+		C0119F3F33FDF143EE05E2AA /* libPods-todoist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF9EA95B633ECF1F13FBA25 /* libPods-todoist.a */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10660E2C23047BB8D21FCE8B /* Pods-todoist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoist.debug.xcconfig"; path = "Target Support Files/Pods-todoist/Pods-todoist.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* todoist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todoist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = todoist/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = todoist/Info.plist; sourceTree = "<group>"; };
-		5BCD273E9F23605011A99F18 /* Pods-todoist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoist.debug.xcconfig"; path = "Target Support Files/Pods-todoist/Pods-todoist.debug.xcconfig"; sourceTree = "<group>"; };
-		7B5702CFACF10737368963EA /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-todoist/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		3BF9EA95B633ECF1F13FBA25 /* libPods-todoist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-todoist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C382B9A6645E017153741DD /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-todoist/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		811DDF5B3E6F402C14863265 /* Pods-todoist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoist.release.xcconfig"; path = "Target Support Files/Pods-todoist/Pods-todoist.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = todoist/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B08513988BAD25723AEA8F5C /* Pods-todoist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoist.release.xcconfig"; path = "Target Support Files/Pods-todoist/Pods-todoist.release.xcconfig"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		E53DE0B247317CF1BFB382B8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = todoist/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = todoist/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* todoist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "todoist-Bridging-Header.h"; path = "todoist/todoist-Bridging-Header.h"; sourceTree = "<group>"; };
-		F97E5A19254FE4D1D3688D90 /* libPods-todoist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-todoist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F43368B24B5E8B3515A022B1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = todoist/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D55EA75343451A2A1C8961D1 /* libPods-todoist.a in Frameworks */,
+				C0119F3F33FDF143EE05E2AA /* libPods-todoist.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,36 +53,26 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				E53DE0B247317CF1BFB382B8 /* PrivacyInfo.xcprivacy */,
+				F43368B24B5E8B3515A022B1 /* PrivacyInfo.xcprivacy */,
 			);
 			name = todoist;
+			sourceTree = "<group>";
+		};
+		190C439C90EC82B0EEBFBE66 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				F18433D4C5CC5A6B4AA3A5A9 /* todoist */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				F97E5A19254FE4D1D3688D90 /* libPods-todoist.a */,
+				3BF9EA95B633ECF1F13FBA25 /* libPods-todoist.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4B40A3B411DB9DCA2D3DA52A /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				E12A9661FA7A3375A0D86821 /* todoist */,
-			);
-			name = ExpoModulesProviders;
-			sourceTree = "<group>";
-		};
-		64F8B52C384D7D979D5B2E18 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5BCD273E9F23605011A99F18 /* Pods-todoist.debug.xcconfig */,
-				B08513988BAD25723AEA8F5C /* Pods-todoist.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -99,8 +89,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				64F8B52C384D7D979D5B2E18 /* Pods */,
-				4B40A3B411DB9DCA2D3DA52A /* ExpoModulesProviders */,
+				A2D45A7069BEC1ECC80F4D7E /* Pods */,
+				190C439C90EC82B0EEBFBE66 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -115,6 +105,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A2D45A7069BEC1ECC80F4D7E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				10660E2C23047BB8D21FCE8B /* Pods-todoist.debug.xcconfig */,
+				811DDF5B3E6F402C14863265 /* Pods-todoist.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,10 +124,10 @@
 			path = todoist/Supporting;
 			sourceTree = "<group>";
 		};
-		E12A9661FA7A3375A0D86821 /* todoist */ = {
+		F18433D4C5CC5A6B4AA3A5A9 /* todoist */ = {
 			isa = PBXGroup;
 			children = (
-				7B5702CFACF10737368963EA /* ExpoModulesProvider.swift */,
+				6C382B9A6645E017153741DD /* ExpoModulesProvider.swift */,
 			);
 			name = todoist;
 			sourceTree = "<group>";
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "todoist" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				98473FF6791DF1BBC08F5A07 /* [Expo] Configure project */,
+				F135E496D154A36F6876F226 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				F9960B6875561F8390B1F748 /* [CP] Embed Pods Frameworks */,
+				E683EA985615BACFA2B1DDFB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				83BFA8B326F3E59771D3324A /* PrivacyInfo.xcprivacy in Resources */,
+				6E1AE404B7A5F36798EF7D1B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +284,25 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-todoist/Pods-todoist-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		98473FF6791DF1BBC08F5A07 /* [Expo] Configure project */ = {
+		E683EA985615BACFA2B1DDFB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-todoist/Pods-todoist-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-todoist/Pods-todoist-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F135E496D154A36F6876F226 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -303,24 +321,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-todoist/expo-configure-project.sh\"\n";
 		};
-		F9960B6875561F8390B1F748 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-todoist/Pods-todoist-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-todoist/Pods-todoist-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -329,7 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				4C657B6B607750D1A8BE1492 /* ExpoModulesProvider.swift in Sources */,
+				2E1F51C94261C61157985FDD /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +338,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BCD273E9F23605011A99F18 /* Pods-todoist.debug.xcconfig */;
+			baseConfigurationReference = 10660E2C23047BB8D21FCE8B /* Pods-todoist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -374,7 +374,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B08513988BAD25723AEA8F5C /* Pods-todoist.release.xcconfig */;
+			baseConfigurationReference = 811DDF5B3E6F402C14863265 /* Pods-todoist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

@@ -20,7 +20,7 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
     }, []);
   
     useEffect(() => {
-      if (!isLoaded) return;
+      if (!isLoaded || !isMounted) return;
       const inAuthGroup = segments[0] === '(auth)';
   
       if (isSignedIn && !inAuthGroup) {
