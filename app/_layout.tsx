@@ -1,7 +1,8 @@
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import { SQLiteProvider } from 'expo-sqlite';
+import React, { Suspense, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Toaster } from 'sonner-native';
@@ -58,10 +59,16 @@ const Rootlayout = () => {
       tokenCache={tokenCache}
     >
       <ClerkLoaded>
+        <Suspense fallback={<ActivityIndicator size="large" color="blue" />}>
+        <SQLiteProvider 
+        databaseName='todoist.db'
+        useSuspense>
         <GestureHandlerRootView>
         <Toaster />
         <InitialLayout />
         </GestureHandlerRootView>
+        </SQLiteProvider>
+        </Suspense>
       </ClerkLoaded>
     </ClerkProvider>
   );
