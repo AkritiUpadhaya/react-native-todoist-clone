@@ -1,24 +1,35 @@
+  import { Ionicons } from '@expo/vector-icons'
+import * as Clipboard from 'expo-clipboard'
 import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { toast } from 'sonner-native'
 import * as DropdownMenu from 'zeego/dropdown-menu'
-
 type MoreButtonProps = {
     pageName:string
 }
 
 const MoreButton = ({pageName}:MoreButtonProps) => {
+
+  const copyToClipboard =async () => {
+    const path = `todoist://(auth)/(tabs)/${pageName.toLowerCase()}`
+    await Clipboard.setStringAsync(path)
+    toast.success('Copied to clipboard')
+    console.log("running")
+  }
+
+  
   return (
     <>
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <TouchableOpacity>
-            <Text>{pageName}</Text>
+            <Ionicons name="ellipsis-horizontal-outline" size={30} color="blue" />
         </TouchableOpacity>
       </DropdownMenu.Trigger> 
 
       <DropdownMenu.Content>
-       <DropdownMenu.Item key='link'>
-        <DropdownMenu.ItemTitle>Copy</DropdownMenu.ItemTitle>
+       <DropdownMenu.Item onSelect={copyToClipboard} key='link'>
+        <DropdownMenu.ItemTitle >Copy</DropdownMenu.ItemTitle>
         <DropdownMenu.ItemIcon
         ios={{
           name:'link',
@@ -28,7 +39,7 @@ const MoreButton = ({pageName}:MoreButtonProps) => {
        </DropdownMenu.Item>
 
        <DropdownMenu.Group>
-        
+
        <DropdownMenu.Item key='select'>
         <DropdownMenu.ItemTitle>Select</DropdownMenu.ItemTitle>
         <DropdownMenu.ItemIcon
