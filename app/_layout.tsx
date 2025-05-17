@@ -1,7 +1,11 @@
+import migrations from '@/drizzle/migrations';
+import { addDummyData } from '@/utils/addDummyData';
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
-import { SQLiteProvider } from 'expo-sqlite';
+import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
 import React, { Suspense, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -53,6 +57,18 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
   
 
 const Rootlayout = () => {
+
+  const expoDb= openDatabaseSync('todos')
+  const db= drizzle(expoDb)
+  const {success, error}= useMigrations(db, migrations)
+
+  useEffect(()=>{
+    if(!success)
+      return
+    addDummyData(db)
+      
+  },[success])
+
   return (
     <ClerkProvider 
       publishableKey={publishableKey}
@@ -61,7 +77,7 @@ const Rootlayout = () => {
       <ClerkLoaded>
         <Suspense fallback={<ActivityIndicator size="large" color="blue" />}>
         <SQLiteProvider 
-        databaseName='todoist.db'
+        databaseName='todos'
         useSuspense>
         <GestureHandlerRootView>
         <Toaster />
