@@ -13,7 +13,7 @@ export const addDummyData = async (db: ExpoSQLiteDatabase) => {
   ]);
   await db.insert(todos).values([
     {
-      name: 'Check out Galaxies.dev for epic React Native courses',
+      name: 'add a reminder',
       description: 'And learn how to build your own apps',
       priority: 1,
       completed: 0,

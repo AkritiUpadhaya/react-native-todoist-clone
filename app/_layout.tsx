@@ -78,7 +78,8 @@ const Rootlayout = () => {
         <Suspense fallback={<ActivityIndicator size="large" color="blue" />}>
         <SQLiteProvider 
         databaseName='todos'
-        useSuspense>
+        useSuspense
+        options={{enableChangeListener:true}}>
         <GestureHandlerRootView>
         <Toaster />
         <InitialLayout />
