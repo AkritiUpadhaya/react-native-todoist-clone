@@ -1,3 +1,4 @@
+import Fab from '@/components/Fab';
 import Task from '@/components/Task';
 import { projects, todos } from '@/db/schema';
 import { Todo } from '@/types/interface';
@@ -65,6 +66,7 @@ export default function index() {
       sections={sectionListData}
       renderItem={({item}) => <Task task={item}/>}
       renderSectionHeader={({section}) => <Text>{section.title}</Text>}/>
+      <Fab/>
     </View>
     </>
   );
