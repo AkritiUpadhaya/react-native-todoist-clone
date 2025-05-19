@@ -14,7 +14,7 @@ export const addDummyData = async (db: ExpoSQLiteDatabase) => {
   await db.insert(todos).values([
     {
       name: 'add a reminder',
-      description: 'And learn how to build your own apps',
+      description: 'make a todoist app',
       priority: 1,
       completed: 0,
       project_id: 1,
