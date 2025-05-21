@@ -72,7 +72,7 @@ export default function index() {
       renderItem={({item}) => <Task task={item}/>}
       renderSectionHeader={({section}) => <Text>{section.title}</Text>}/>
       <Button title='Try!' onPress={ () => { Sentry.captureException(new Error('First error')) }}/>
-      <Button title='randomFunc' onPress={ () => {randomFunc}}/>
+      {/* <Button title='randomFunc' onPress={ () => {randomFunc()}}/> */}
       <Fab/>
     </View>
     </>
