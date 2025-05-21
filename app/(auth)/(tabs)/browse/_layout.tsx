@@ -21,6 +21,7 @@ export default function browseLayout() {
           )
         }
     }}/>
+    <Stack.Screen name="projects" options={{headerShown:true}}/>
     </Stack>
   )
 }
