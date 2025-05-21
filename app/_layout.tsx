@@ -10,6 +10,23 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Toaster } from 'sonner-native';
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://0f271e66bd3e35987c2c1e2548cca49a@o4509350067372032.ingest.us.sentry.io/4509350106759168',
+
+  // Adds more context data to events (IP address, cookies, user, etc.)
+  // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
+  sendDefaultPii: true,
+
+  // Configure Session Replay
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1,
+  integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
+
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+});
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 
@@ -91,4 +108,4 @@ const Rootlayout = () => {
   );
 };
 
-export default Rootlayout;
+export default Sentry.wrap(Rootlayout);

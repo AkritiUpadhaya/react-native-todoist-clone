@@ -2,13 +2,14 @@ import Fab from '@/components/Fab';
 import Task from '@/components/Task';
 import { projects, todos } from '@/db/schema';
 import { Todo } from '@/types/interface';
+import * as Sentry from '@sentry/react-native';
 import { format } from 'date-fns';
 import { eq } from 'drizzle-orm';
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { useSQLiteContext } from 'expo-sqlite';
 import React, { useEffect, useState } from 'react';
-import { SectionList, Text, View } from 'react-native';
+import { Button, SectionList, Text, View } from 'react-native';
 interface Section {
   title: string;
   data: Todo[];
@@ -57,6 +58,10 @@ export default function index() {
     setSectionListData(listData);
   
   }, [data])
+  
+  const randomFunc=()=>{
+    throw new Error("Random error");
+  }
 
   return (
     <>
@@ -66,6 +71,8 @@ export default function index() {
       sections={sectionListData}
       renderItem={({item}) => <Task task={item}/>}
       renderSectionHeader={({section}) => <Text>{section.title}</Text>}/>
+      <Button title='Try!' onPress={ () => { Sentry.captureException(new Error('First error')) }}/>
+      <Button title='randomFunc' onPress={ () => {randomFunc}}/>
       <Fab/>
     </View>
     </>

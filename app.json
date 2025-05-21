@@ -35,7 +35,15 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "todoist",
+          "organization": "akriti-qe"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
