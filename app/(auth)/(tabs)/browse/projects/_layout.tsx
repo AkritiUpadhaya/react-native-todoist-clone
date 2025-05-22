@@ -22,7 +22,7 @@ const ProjectLayout = () => {
         }}
       />
       <Stack.Screen
-        name="color-select"
+        name="colors"
         options={{
           title: 'Color',
           headerTransparent: true,

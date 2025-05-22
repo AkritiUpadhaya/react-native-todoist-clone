@@ -10,7 +10,6 @@ import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'reac
 
 
 
-
 const Page=()=> {
   const {signOut}= useAuth()
   const db= useSQLiteContext()
@@ -23,21 +22,22 @@ const Page=()=> {
     await drizzleDb.delete(projects).where(eq(projects.id, id))
   }
   
-// const onNewProject= async()=>{
-//   console.log('onNewProject called');
-//   if(data.length>=5 && !isPro){
-//     // go pro
-//   }
-//   else{
-//     router.push('/(auth)/(tabs)/browse/projects')
-//   }
-// }  
+const onNewProject= ()=>{
+
+  if(data.length>=5 && !isPro){
+    router.push('/(auth)/(tabs)/browse/projects')
+    // go pro
+  }
+  else{
+   alert("same kinda error")
+  }
+}  
   return (
     <>
     <View style={styles.container} >
       <View style={styles.header}>
       <Text style={styles.headerText}>My projects</Text>
-      <TouchableOpacity onPress={()=>router.push('/(auth)/(tabs)/browse/projects')}>
+      <TouchableOpacity onPress={onNewProject}>
         <Ionicons name='add' size={24} color='black'/>
       </TouchableOpacity>
       </View>
