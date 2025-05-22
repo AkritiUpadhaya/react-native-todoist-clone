@@ -9,7 +9,6 @@ const ProjectLayout = () => {
         contentStyle: { backgroundColor:'#fff' },
         headerTintColor: 'white',
         headerTitleStyle: { color: '#000' },
-        presentation:'modal',
       }}>
       <Stack.Screen
         name="index"
@@ -26,7 +25,9 @@ const ProjectLayout = () => {
         options={{
           title: 'Color',
           headerTransparent: true,
-          presentation:'modal'
+          headerLeft: () => (
+            <Button title="Back" onPress={() => router.back()} color={'black'} />
+          ),
         }}
       />
     </Stack>
