@@ -2,11 +2,10 @@ import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import { toast } from 'sonner-native'
 
 export default function Fab() {
   const onPress = () => {
-    toast.success('Fab pressed')
+    // toast.success('Fab pressed')
     router.push('/(auth)/task/new')  
 }
   return (

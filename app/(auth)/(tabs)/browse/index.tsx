@@ -22,16 +22,15 @@ const Page=()=> {
     await drizzleDb.delete(projects).where(eq(projects.id, id))
   }
   
-const onNewProject= ()=>{
-
-  if(data.length>=5 && !isPro){
-    router.push('/(auth)/(tabs)/browse/projects')
-    // go pro
+  const onNewProject = () => {
+    if (data.length >= 8 && !isPro) {
+      // Show "Go Pro" prompt, block project creation
+      alert("You have reached the free limit. Please upgrade to Pro to add more projects!");
+    } else {
+      // Allow project creation
+      router.push('/(auth)/(tabs)/browse/projects');
+    }
   }
-  else{
-   alert("same kinda error")
-  }
-}  
   return (
     <>
     <View style={styles.container} >

@@ -1,12 +1,26 @@
 import { Stack } from 'expo-router'
 import React from 'react'
+import { useWindowDimensions } from 'react-native'
 
 export default function authLayout() {
+  const {height}= useWindowDimensions()
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{headerShown:false}}/>
-      <Stack.Screen name="task/new" options={{presentation:'modal'}}/>
-      <Stack.Screen name="task/[id]" options={{presentation:'modal'}}/>
+      <Stack.Screen name="task/new" options={{presentation:'formSheet',
+        title:'',
+        headerShown:false,
+        sheetAllowedDetents:height>700?[0.22]:[0.3],
+        sheetExpandsWhenScrolledToEdge:false,
+        sheetCornerRadius:12,
+      }}/>
+      <Stack.Screen name="task/[id]" options={{presentation:'formSheet',
+         title:'',
+         headerShown:false,
+         sheetAllowedDetents:height>700?[0.22]:[0.3],
+         sheetExpandsWhenScrolledToEdge:false,
+         sheetCornerRadius:12,
+      }}/>
     </Stack>
   )
 }
