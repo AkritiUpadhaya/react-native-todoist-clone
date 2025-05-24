@@ -9,9 +9,9 @@ import { useSQLiteContext } from 'expo-sqlite'
 import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { useMMKVString } from 'react-native-mmkv'
 import { todos } from '../db/schema'
 import { Todo } from '../types/interface'
-
 
 type FormProps={
   todo?:Todo & {project_name:string; project_color:string; project_id:number}
@@ -36,6 +36,9 @@ const Form=({todo}:FormProps)=>{
         },
         mode:'onChange'
       })
+      const [selectedDate, setSelectedDate] = useState<Date>(
+        todo?.due_date ? new Date(todo.due_date) : new Date()
+      );
 
       const {data} = useLiveQuery(drizzleDb.select().from(projects))
       const [selectedProject, setSelectedProject] = useState<Project>(
@@ -51,6 +54,15 @@ const Form=({todo}:FormProps)=>{
               color: '#000',
             }
       );
+
+      const [previouslySelectedDate, setPreviouslySelectedDate] = useMMKVString('selectedDate');
+
+  useEffect(() => {
+    if (previouslySelectedDate) {
+      setSelectedDate(new Date(previouslySelectedDate));
+      setPreviouslySelectedDate(undefined);
+    }
+  }, [previouslySelectedDate]);
       useEffect(()=>{
         trigger()
       },[trigger])
@@ -62,7 +74,7 @@ const Form=({todo}:FormProps)=>{
               name: data.name,
               description: data.description,
               project_id: selectedProject.id,
-              due_date:0,
+              due_date:selectedDate.getTime(),
             })
             .where(eq(todos.id, todo.id));
         } else {
@@ -73,12 +85,17 @@ const Form=({todo}:FormProps)=>{
               priority: 0,
               date_added: Date.now(),
               completed: 0,
-              due_date:0,
+              due_date:selectedDate.getTime(),
           });
         }
         router.dismiss();
       };
-      console.log("submitted")
+      
+      const changeDate=()=>{
+        const dateString= selectedDate.toISOString().split('T')[0];
+          setPreviouslySelectedDate(dateString);
+          router.push('/task/date')
+      }
   return (
     <View style={{flex:1}}>
           <ScrollView contentContainerStyle={[styles.container]} keyboardShouldPersistTaps="always" >
@@ -120,6 +137,7 @@ const Form=({todo}:FormProps)=>{
             keyboardShouldPersistTaps="always"
             >
               <Pressable
+              onPress={changeDate}
               style={({ pressed }) => {
                 return [
                   styles.outlinedButton,
