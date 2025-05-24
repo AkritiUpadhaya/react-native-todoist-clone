@@ -2,12 +2,16 @@ import { Colors } from '@/constants/Colors'
 import { projects } from '@/db/schema'
 import { Project } from '@/types/interface'
 import { Ionicons } from '@expo/vector-icons'
+import { eq } from 'drizzle-orm'
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite'
+import { router } from 'expo-router'
 import { useSQLiteContext } from 'expo-sqlite'
-import React, { useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import React, { useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { todos } from '../db/schema'
 import { Todo } from '../types/interface'
+
 
 type FormProps={
   todo?:Todo & {project_name:string; project_color:string; project_id:number}
@@ -29,7 +33,8 @@ const Form=({todo}:FormProps)=>{
         defaultValues:{
           name:todo?.name || '',
           description:todo?.description || '',
-        }
+        },
+        mode:'onChange'
       })
 
       const {data} = useLiveQuery(drizzleDb.select().from(projects))
@@ -46,20 +51,47 @@ const Form=({todo}:FormProps)=>{
               color: '#000',
             }
       );
-      const onSubmit: SubmitHandler<TodoFormData> = (data) => console.log(data) 
+      useEffect(()=>{
+        trigger()
+      },[trigger])
+      const onSubmit = async (data: TodoFormData) => {
+        if (todo) {
+          await drizzleDb
+            .update(todos)
+            .set({
+              name: data.name,
+              description: data.description,
+              project_id: selectedProject.id,
+              due_date:0,
+            })
+            .where(eq(todos.id, todo.id));
+        } else {
+          await drizzleDb.insert(todos).values({
+            name: data.name,
+              description: data.description,
+              project_id: selectedProject.id,
+              priority: 0,
+              date_added: Date.now(),
+              completed: 0,
+              due_date:0,
+          });
+        }
+        router.dismiss();
+      };
       console.log("submitted")
   return (
     <View style={{flex:1}}>
-          <ScrollView contentContainerStyle={[styles.container]} >
+          <ScrollView contentContainerStyle={[styles.container]} keyboardShouldPersistTaps="always" >
           <Controller
             control={control}
             name="name"
             rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { onChange, value , onBlur} }) => (
               <TextInput
                 style={styles.titleInput}
                 placeholder="Task name"
                 value={value}
+                onBlur={onBlur}
                 onChangeText={onChange}
                 autoFocus
                 autoCorrect={false}
@@ -85,7 +117,18 @@ const Form=({todo}:FormProps)=>{
             horizontal
             showsHorizontalScrollIndicator={false}
             style={styles.actionButtonsContainer}
+            keyboardShouldPersistTaps="always"
             >
+              <Pressable
+              style={({ pressed }) => {
+                return [
+                  styles.outlinedButton,
+                  { backgroundColor: pressed ? Colors.lightBorder : 'transparent' },
+                ];
+              }}>
+              <Ionicons name="calendar-outline" size={20} color={Colors.dark} />
+              <Text style={styles.outlinedButtonText}>Date</Text>
+            </Pressable>
             <Pressable
               style={({ pressed }) => {
                 return [
@@ -117,7 +160,25 @@ const Form=({todo}:FormProps)=>{
               <Text style={styles.outlinedButtonText}>Location</Text>
             </Pressable>
           </ScrollView> 
+        <View style={styles.bottomRow}>
+        <Pressable
+        onPress={()=>{console.log("pressed")}}
+              style={({ pressed }) => {
+                return [
+                  styles.outlinedButton,
+                  { backgroundColor: pressed ? Colors.lightBorder : 'transparent' },
+                ];
+              }}>
+              <Ionicons name="pricetags-outline" size={20} color={Colors.dark} />
+              <Text>Labels</Text>
+            </Pressable>
 
+            <Pressable 
+            onPress={handleSubmit(onSubmit)}
+            style={[styles.submitButton, { opacity: errors.name ? 0.5 : 1 }]}>
+              <Ionicons name="arrow-up" size={24} color={"#fff"} />
+            </Pressable>
+        </View>
 
 
         </ScrollView>
