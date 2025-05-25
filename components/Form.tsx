@@ -1,14 +1,15 @@
-import { Colors } from '@/constants/Colors'
+import { Colors, DATE_COLORS } from '@/constants/Colors'
 import { projects } from '@/db/schema'
 import { Project } from '@/types/interface'
 import { Ionicons } from '@expo/vector-icons'
+import { format, isSameDay, isTomorrow } from 'date-fns'
 import { eq } from 'drizzle-orm'
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite'
 import { router } from 'expo-router'
 import { useSQLiteContext } from 'expo-sqlite'
 import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Dimensions, FlatList, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useMMKVString } from 'react-native-mmkv'
 import { todos } from '../db/schema'
 import { Todo } from '../types/interface'
@@ -39,6 +40,7 @@ const Form=({todo}:FormProps)=>{
       const [selectedDate, setSelectedDate] = useState<Date>(
         todo?.due_date ? new Date(todo.due_date) : new Date()
       );
+      const [showProjects, setShowProjects] = useState(false);
 
       const {data} = useLiveQuery(drizzleDb.select().from(projects))
       const [selectedProject, setSelectedProject] = useState<Project>(
@@ -91,13 +93,57 @@ const Form=({todo}:FormProps)=>{
         router.dismiss();
       };
       
-      const changeDate=()=>{
-        const dateString= selectedDate.toISOString().split('T')[0];
-          setPreviouslySelectedDate(dateString);
-          router.push('/task/date')
-      }
+
+      const onProjectPress = (project: Project) => {
+        setSelectedProject(project);
+        setShowProjects(false);
+      };
+    
+
+      const getDateObject = (date: Date) => {
+        if (isSameDay(date, new Date())) {
+          return { name: 'Today', color: DATE_COLORS.today };
+        } else if (isTomorrow(new Date(date))) {
+          return { name: 'Tomorrow', color: DATE_COLORS.tomorrow };
+        } else {
+          return { name: format(new Date(date), 'd MMM'), color: DATE_COLORS.other };
+        }
+      };
+    
+
   return (
     <View style={{flex:1}}>
+       <Modal
+          animationType="fade"
+          transparent={true}
+          visible={showProjects}
+          onRequestClose={() => {
+            setShowProjects(!showProjects);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <FlatList
+                data={data}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.projectButton}
+                    onPress={() => onProjectPress(item)}>
+                    <Text style={{ color: item.color }}>#</Text>
+                    <Text style={styles.projectButtonText}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+                ItemSeparatorComponent={() => (
+                  <View
+                    style={{
+                      height: StyleSheet.hairlineWidth,
+                      backgroundColor: Colors.lightBorder,
+                    }}
+                  />
+                )}
+              />
+            </View>
+          </View>
+        </Modal>
           <ScrollView contentContainerStyle={[styles.container]} keyboardShouldPersistTaps="always" >
           <Controller
             control={control}
@@ -137,16 +183,29 @@ const Form=({todo}:FormProps)=>{
             keyboardShouldPersistTaps="always"
             >
               <Pressable
-              onPress={changeDate}
+              onPress={() => {
+                const dateString = selectedDate.toISOString();
+                setPreviouslySelectedDate(dateString);
+                router.push('/task/date');
+              }}
               style={({ pressed }) => {
                 return [
                   styles.outlinedButton,
                   { backgroundColor: pressed ? Colors.lightBorder : 'transparent' },
+                  { borderColor: getDateObject(selectedDate).color },
                 ];
               }}>
-              <Ionicons name="calendar-outline" size={20} color={Colors.dark} />
-              <Text style={styles.outlinedButtonText}>Date</Text>
+              <Ionicons
+                name="calendar-outline"
+                size={20}
+                color={getDateObject(selectedDate).color}
+              />
+              <Text
+                style={[styles.outlinedButtonText, { color: getDateObject(selectedDate).color }]}>
+                {getDateObject(selectedDate).name}
+              </Text>
             </Pressable>
+
             <Pressable
               style={({ pressed }) => {
                 return [
@@ -180,15 +239,20 @@ const Form=({todo}:FormProps)=>{
           </ScrollView> 
         <View style={styles.bottomRow}>
         <Pressable
-        onPress={()=>{console.log("pressed")}}
+              onPress={() => setShowProjects(true)}
               style={({ pressed }) => {
                 return [
                   styles.outlinedButton,
                   { backgroundColor: pressed ? Colors.lightBorder : 'transparent' },
                 ];
               }}>
-              <Ionicons name="pricetags-outline" size={20} color={Colors.dark} />
-              <Text>Labels</Text>
+              {selectedProject.id === 1 && (
+                <Ionicons name="file-tray-outline" size={20} color={Colors.dark} />
+              )}
+              {selectedProject.id !== 1 && <Text style={{ color: selectedProject.color }}>#</Text>}
+
+              <Text style={styles.outlinedButtonText}>{selectedProject?.name}</Text>
+              <Ionicons name="caret-down" size={14} color={Colors.dark} />
             </Pressable>
 
             <Pressable 
@@ -269,5 +333,14 @@ const styles = StyleSheet.create({
   },
   projectButtonText: {
     fontSize: 16,
+  },
+  modalView: {
+    margin: 20,
+    width: Dimensions.get('window').width - 60,
+    height: 200,
+    backgroundColor: 'white',
+    borderRadius: 16,
+    boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
+    elevation: 5,
   },
 });
